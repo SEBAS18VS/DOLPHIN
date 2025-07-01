@@ -1,0 +1,70 @@
+<h1>Resumen del Pedido</h1>
+
+<style>
+  .pedido-item {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .pedido-item img {
+    max-width: 80px;
+    border-radius: 8px;
+  }
+
+  .pedido-info {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-volver {
+    background-color: #999;
+    color: white;
+    margin-top: 30px;
+  }
+
+  .btn-volver:hover {
+    background-color: #777;
+    transform: scale(1.05);
+  }
+
+  .btn-eliminar {
+    background-color: crimson;
+    color: white;
+  }
+
+  .btn-eliminar:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+  }
+</style>
+
+<div id="pedido-contenido">Cargando pedido...</div>
+
+<button class="btn btn-volver" onclick="cargarVista('selector.html')">← Seguir pidiendo</button>
+
+<script>
+  // Esperar hasta que el DOM esté cargado
+  window.addEventListener('DOMContentLoaded', () => {
+    if (typeof obtenerPedidoHTML === 'function') {
+      const contenedor = document.getElementById('pedido-contenido');
+      if (contenedor) contenedor.innerHTML = obtenerPedidoHTML();
+    } else {
+      document.getElementById('pedido-contenido').innerHTML = '<p style="color:red;">No se pudo cargar el pedido.</p>';
+    }
+  });
+</script>

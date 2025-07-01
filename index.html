@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Configurador</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 0;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        #contenedor {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pedir {
+            background-color: #0925c4;
+            color: white;
+        }
+
+        .btn-pedir:hover {
+            background-color: #001a99;
+            transform: scale(1.05);
+        }
+
+        .btn-volver {
+            background-color: #999;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .btn-volver:hover {
+            background-color: #777;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedor">Cargando...</div>
+
+    <script>
+        // Cargar páginas dinámicamente
+        async function cargarVista(ruta) {
+            try {
+                const respuesta = await fetch(ruta);
+                if (!respuesta.ok) throw new Error(`Error al cargar: ${ruta}`);
+                const html = await respuesta.text();
+                document.getElementById('contenedor').innerHTML = html;
+
+                // Si es la pantalla de inicio, activar reloj
+                if (ruta === 'inicio.html') {
+                    const fechaHora = document.getElementById("fechaHora");
+                    if (fechaHora) {
+                        setInterval(() => {
+                            const now = new Date();
+                            const fecha = now.toLocaleDateString('es-ES', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                            const hora = now.toLocaleTimeString('es-ES');
+                            fechaHora.innerText = `${fecha} - ${hora}`;
+                        }, 1000);
+                    }
+                }
+
+                // Si se carga la vista de pedido, mostrar los productos
+                // Si se carga la vista de pedido, mostrar los productos después de un breve retardo
+                if (ruta === 'pedido.html') {
+                    setTimeout(() => {
+                        const contenedor = document.getElementById("pedido-contenido");
+                        if (contenedor) contenedor.innerHTML = obtenerPedidoHTML();
+                    }, 50); // Espera 50 milisegundos a que el contenido esté en el DOM
+                }
+
+            } catch (error) {
+                document.getElementById('contenedor').innerHTML = `<p style="color:red;">${error.message}</p>`;
+            }
+        }
+
+        // Lógica de pedidos
+        let pedido = [];
+
+        // Agrega un producto al pedido
+        function agregarAlPedido(producto) {
+            const existente = pedido.find(p => p.referencia === producto.referencia);
+            if (existente) {
+                existente.cantidad += 1;
+            } else {
+                producto.cantidad = 1;
+                pedido.push(producto);
+            }
+            alert(`${producto.nombre} agregado al pedido`);
+        }
+
+        // Esta es la función que los botones llaman desde cremalleras.html
+        function agregarProductoDesdeBoton(btn) {
+            const producto = {
+                nombre: btn.getAttribute('data-nombre'),
+                referencia: btn.getAttribute('data-referencia'),
+                imagen: btn.getAttribute('data-imagen')
+            };
+            agregarAlPedido(producto);
+        }
+
+        // Función que genera el HTML del pedido (usada en pedido.html)
+        function obtenerPedidoHTML() {
+            if (pedido.length === 0) {
+                return '<p>No hay productos en el pedido.</p>';
+            }
+
+            return pedido.map((item, index) => `
+      <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 20px;">
+        <img src="${item.imagen}" alt="${item.nombre}" style="max-width: 80px; border-radius: 8px;">
+        <div style="flex-grow: 1;">
+          <p style="margin: 0;"><strong>${item.nombre}</strong></p>
+          <p style="margin: 0;">Ref: ${item.referencia}</p>
+          <p style="margin: 0;">Cantidad: ${item.cantidad}</p>
+        </div>
+        <button class="btn btn-volver" onclick="eliminarDelPedido(${index})">Eliminar</button>
+      </div>
+    `).join('');
+        }
+
+        // Elimina un producto del pedido
+        function eliminarDelPedido(index) {
+            pedido.splice(index, 1);
+            cargarVista('pedido.html');
+        }
+
+
+        function obtenerPedidoHTML() {
+            if (pedido.length === 0) {
+                return '<p>No hay productos en el pedido.</p>';
+            }
+
+            return pedido.map((item, index) => `
+        <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 20px;">
+          <img src="${item.imagen}" alt="${item.nombre}" style="max-width: 80px; border-radius: 8px;">
+          <div style="flex-grow: 1;">
+            <p style="margin: 0;"><strong>${item.nombre}</strong></p>
+            <p style="margin: 0;">Ref: ${item.referencia}</p>
+            <p style="margin: 0;">Cantidad: ${item.cantidad}</p>
+          </div>
+          <button class="btn btn-volver" onclick="eliminarDelPedido(${index})">Eliminar</button>
+        </div>
+      `).join('');
+        }
+
+        // Cargar la pantalla de inicio al abrir la app
+        cargarVista('inicio.html');
+    </script>
+
+</body>
+
+</html>

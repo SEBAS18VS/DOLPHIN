@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pantalla de Inicio</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+                url("IMG IDENTIDAD/patron-cremallera.png") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        img {
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        #fechaHora {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            background-color: #0925c4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #119ab3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <img src="IMG IDENTIDAD/LOGO.png" alt="Logo">
+        <h1>Hola, ¿qué vas a pedir hoy?</h1>
+        <div id="fechaHora">Cargando fecha y hora...</div>
+        <button onclick="cargarVista('selector.html')">Ingresar</button>
+    </section>
+
+    <script>
+        // Mostrar fecha y hora en tiempo real
+        const fechaHora = document.getElementById("fechaHora");
+        setInterval(() => {
+            const now = new Date();
+            const fecha = now.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+            const hora = now.toLocaleTimeString('es-ES');
+            fechaHora.innerText = `${fecha} - ${hora}`;
+        }, 1000);
+    </script>
+
+</body>
+
+</html>

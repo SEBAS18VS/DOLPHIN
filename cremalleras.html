@@ -1,0 +1,68 @@
+<h1>Cremalleras disponibles</h1>
+<p>Selecciona el tipo de cremallera que deseas pedir:</p>
+
+<style>
+    .btn {
+        padding: 12px 24px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-pedir {
+        background-color: #0925c4;
+        color: white;
+    }
+
+    .btn-pedir:hover {
+        background-color: #001a99;
+        transform: scale(1.05);
+    }
+
+    .btn-volver {
+        background-color: #999;
+        color: white;
+        margin-top: 30px;
+    }
+
+    .btn-volver:hover {
+        background-color: #119ab3;
+        transform: scale(1.05);
+    }
+</style>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+    <div style="text-align: center;">
+        <img src="IMG CREMALLERA/cremallera-azul.png" alt="Cremallera AZUL" style="width: 100%; max-width: 180px;">
+        <p><strong>Ref:</strong> CRM-AZUL</p>
+        <button class="btn btn-pedir" data-nombre="Cremallera Azul" data-referencia="CRM-AZUL"
+            data-imagen="IMG CREMALLERA/cremallera-azul.png" onclick="agregarProductoDesdeBoton(this)">
+            Pedir
+        </button>
+    </div>
+
+    <div style="text-align: center;">
+        <img src="IMG CREMALLERA/cremallera-negro.png" alt="Cremallera negra" style="width: 100%; max-width: 180px;">
+        <p><strong>Ref:</strong> CRM-NEGRA</p>
+        <button class="btn btn-pedir" data-nombre="Cremallera Negra" data-referencia="CRM-NEGRA"
+            data-imagen="IMG CREMALLERA/cremallera-negro.png" onclick="agregarProductoDesdeBoton(this)">
+            Pedir
+        </button>
+    </div>
+
+    <div style="text-align: center;">
+        <img src="IMG CREMALLERA/cremallera-rojo.png" alt="Cremallera Roja" style="width: 100%; max-width: 180px;">
+        <p><strong>Ref:</strong> CRM-ROJA</p>
+        <button class="btn btn-pedir" data-nombre="Cremallera Roja" data-referencia="CRM-ROJA"
+            data-imagen="IMG CREMALLERA/cremallera-rojo.png" onclick="agregarProductoDesdeBoton(this)">
+            Pedir
+        </button>
+    </div>
+</div>
+
+<button class="btn btn-volver" onclick="cargarVista('selector.html')">← Volver</button>
+<button class="btn btn-pedir" onclick="cargarVista('pedido.html')">
+    📦 Ver pedido
+</button>

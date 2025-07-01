@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selecciona una categoría</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+                url("IMG IDENTIDAD/patron-cremallera.png") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .boton-categoria {
+            padding: 30px 60px;
+            font-size: 22px;
+            background-color: #0925c4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .boton-categoria:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+
+        .btn-volver {
+            margin-top: 40px;
+            font-size: 16px;
+            background: #000000;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-volver:hover {
+            background: #119ab3;
+        }
+
+        .btn-pedir{
+            margin-top: 40px;
+            font-size: 16px;
+            background: #000000;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .btn-pedir:hover {
+            background: #119ab3;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>¿Qué deseas comprar?</h1>
+
+    <div class="opciones">
+        <button class="boton-categoria" onclick="cargarVista('sliders.html')">Ver Sliders</button>
+        <button class="boton-categoria" onclick="cargarVista('cremalleras.html')">Ver Cremalleras</button>
+    </div>
+
+    <button class="btn-volver" onclick="cargarVista('inicio.html')">← Volver al inicio</button>
+    <button class="btn btn-pedir" onclick="cargarVista('pedido.html')">
+        📦 Ver pedido
+    </button>
+
+
+
+</body>
+
+</html>
